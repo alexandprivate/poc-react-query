@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { QueryCache, ReactQueryCacheProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
+import Posts from "./Posts";
+import Post from "./Post";
+import CreatePost from "./CreatePost";
+import Loader from "./Loader";
+
+const queryCache = new QueryCache();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [postId, setPostId] = React.useState("");
+    return (
+        <ReactQueryCacheProvider queryCache={queryCache}>
+            <Loader />
+            <CreatePost />
+            <div className="container mx-auto">
+                <Posts setPostId={setPostId} />
+                {postId && <Post postId={postId} setPostId={setPostId} />}
+            </div>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </ReactQueryCacheProvider>
+    );
 }
 
 export default App;

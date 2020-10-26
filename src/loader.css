@@ -1,0 +1,18 @@
+.loader {
+    animation: animation 1s ease infinite;
+}
+
+@keyframes animation {
+    0% {
+        width: 0;
+        margin-left: 0;
+    }
+    50% {
+        width: 100%;
+        margin-left: 0;
+    }
+    100% {
+        width: 0;
+        margin-left: 100%;
+    }
+}
